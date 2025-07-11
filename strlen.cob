@@ -3,22 +3,22 @@
        ENVIRONMENT DIVISION.
        DATA DIVISION.
        WORKING-STORAGE SECTION.
-       01  WS-LEN     PIC 9(9) COMP-5.
-       01  WS-INDEX   PIC 9(9) COMP-5.
+       01  WS-STRLEN-LEN     PIC 9(9) COMP-5.
+       01  WS-STRLEN-INDEX   PIC 9(9) COMP-5.
 
        LINKAGE SECTION.
-       01  LS-SRC     PIC X(255).
-       01  LS-RET     PIC 9(9) COMP-5.
+       01  LS-STRLEN-SRC     PIC X(255).
+       01  LS-STRLEN-RET     PIC 9(9) COMP-5.
 
-       PROCEDURE DIVISION USING LS-SRC LS-RET.
-           MOVE 0          TO WS-LEN
-           MOVE 1          TO WS-INDEX
+       PROCEDURE DIVISION USING LS-STRLEN-SRC LS-STRLEN-RET.
+           MOVE 0          TO WS-STRLEN-LEN
+           MOVE 1          TO WS-STRLEN-INDEX
 
-           PERFORM UNTIL WS-INDEX > LENGTH OF LS-SRC
+           PERFORM UNTIL WS-STRLEN-INDEX > LENGTH OF LS-STRLEN-SRC
                          OR
-                         LS-SRC(WS-INDEX:1) = LOW-VALUES
-               ADD 1      TO WS-LEN
-               ADD 1      TO WS-INDEX
+                         LS-STRLEN-SRC(WS-STRLEN-INDEX:1) = LOW-VALUES
+               ADD 1      TO WS-STRLEN-LEN
+               ADD 1      TO WS-STRLEN-INDEX
            END-PERFORM
-           MOVE WS-LEN      TO LS-RET
-           GOBACK
+           MOVE WS-STRLEN-LEN      TO LS-STRLEN-RET
+           GOBACK.
