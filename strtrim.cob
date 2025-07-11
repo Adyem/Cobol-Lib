@@ -3,15 +3,15 @@
        ENVIRONMENT DIVISION.
        DATA DIVISION.
        WORKING-STORAGE SECTION.
-       01    WS-INDEX             PIC 9(9) COMP-5.
-       01    WS-START             PIC 9(9) COMP-5.
-       01    WS-END               PIC 9(9) COMP-5.
-       01    WS-DEST-INDEX        PIC 9(9) COMP-5.
+       01    WS-INDEX            PIC 9(9) COMP-5.
+       01    WS-START            PIC 9(9) COMP-5.
+       01    WS-END              PIC 9(9) COMP-5.
+       01    WS-DEST-INDEX       PIC 9(9) COMP-5.
        01    WS-SPACE            PIC X VALUE ' '.
        01    WS-TAB              PIC X VALUE X'09'.
        01    WS-LF               PIC X VALUE X'0A'.
        01    WS-CR               PIC X VALUE X'0D'.
-       01    WS-CHAR                PIC X.
+       01    WS-CHAR             PIC X.
 
        LINKAGE SECTION.
        01   LS-STRTRIM-SRC       PIC X(255).
@@ -21,7 +21,6 @@
            MOVE 1       TO WS-START
            MOVE LENGTH OF LS-STRTRIM-SRC TO WS-END
 
-           * Skip leading whitespace
            PERFORM UNTIL WS-START > WS-END
                MOVE LS-STRTRIM-SRC(WS-START:1) TO WS-CHAR
                IF WS-CHAR = WS-SPACE OR
@@ -34,7 +33,6 @@
                END-IF
            END-PERFORM
 
-           * Skip trailing whitespace
            PERFORM UNTIL WS-END < WS-START
                MOVE LS-STRTRIM-SRC(WS-END:1) TO WS-CHAR
                IF WS-CHAR = WS-SPACE OR
