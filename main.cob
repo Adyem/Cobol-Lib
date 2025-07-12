@@ -24,14 +24,6 @@
             END-DISPLAY
 
             MOVE WS-STR TO WS-STR2
-
-            CALL 'STRLEN' USING WS-STR WS-LEN
-            END-CALL
-            DISPLAY "Length of trimmed string is " WS-LEN
-            END-DISPLAY
-
-            MOVE WS-LEN TO WS-LEN2
-
             CALL 'STRCMP' USING WS-CMP-RET WS-STR WS-STR2 WS-LEN WS-LEN2
             END-CALL
             DISPLAY "STRCMP result: " WS-CMP-RET
