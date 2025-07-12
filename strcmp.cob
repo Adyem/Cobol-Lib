@@ -8,7 +8,7 @@
        01  WS-INDEX           PIC 9(9) COMP-5.
 
        LINKAGE SECTION.
-       01  LS-STRCMP-RETURN        PIC 9(9) COMP-5.
+       01  LS-STRCMP-RETURN        PIC S9(9) COMP-5.
        01  LS-STRCMP-SRC1          PIC X(255).
        01  LS-STRCMP-SRC1-LENGTH   PIC 9(5) COMP-5.
        01  LS-STRCMP-SRC2          PIC X(255).
@@ -33,6 +33,7 @@
                   GOBACK
                END-IF
                ADD 1 TO WS-INDEX
+               END-ADD
            END-PERFORM
             IF LS-STRCMP-SRC1-LENGTH IS GREATER THAN
                 LS-STRCMP-SRC2-LENGTH

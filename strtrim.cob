@@ -27,6 +27,7 @@
                   WS-CHAR = WS-LF OR
                   WS-CHAR = WS-CR
                    ADD 1 TO WS-START
+                   END-ADD
                ELSE
                    EXIT PERFORM
                END-IF
@@ -38,7 +39,8 @@
                   WS-CHAR = WS-TAB OR
                   WS-CHAR = WS-LF OR
                   WS-CHAR = WS-CR
-                   SUBTRACT 1 FROM WS-END
+                     SUBTRACT 1 FROM WS-END
+                     END-SUBTRACT
                ELSE
                    EXIT PERFORM
                END-IF
@@ -47,14 +49,17 @@
            MOVE 1 TO WS-DEST-INDEX
            MOVE WS-START TO WS-INDEX
            PERFORM UNTIL WS-INDEX > WS-END
-               MOVE LS-STRTRIM-SRC(WS-INDEX:1)
-                   TO LS-STRTRIM-SRC(WS-DEST-INDEX:1)
+               MOVE LS-STRTRIM-SRC(WS-INDEX:1) TO WS-CHAR
+               MOVE WS-CHAR TO LS-STRTRIM-SRC(WS-DEST-INDEX:1)
                ADD 1 TO WS-INDEX
+               END-ADD
                ADD 1 TO WS-DEST-INDEX
+               END-ADD
            END-PERFORM
 
            PERFORM UNTIL WS-DEST-INDEX > LENGTH OF LS-STRTRIM-SRC
                MOVE WS-SPACE TO LS-STRTRIM-SRC(WS-DEST-INDEX:1)
                ADD 1 TO WS-DEST-INDEX
+               END-ADD
            END-PERFORM
            GOBACK.
