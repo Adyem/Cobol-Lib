@@ -1,5 +1,5 @@
        IDENTIFICATION DIVISION.
-       PROGRAM-ID. STRTRIM.
+       PROGRAM-ID. STRCMP.
 
        ENVIRONMENT DIVISION.
 
@@ -16,11 +16,11 @@
            MOVE 1 TO WS-INDEX
 
            PERFORM UNTIL WS-INDEX > FUNCTION LENGTH(LS-STRCMP-SRC1) OR
-           -    WS-INDEX > FUNCTION LENGTH(LS-STRCMP-SRC2)
+               WS-INDEX > FUNCTION LENGTH(LS-STRCMP-SRC2)
                IF LS-STRCMP-SRC1(WS-INDEX:1) IS NOT EQUAL TO
-               -    LS-STRCMP-SRC2(WS-INDEX:1)
-                  IF LS-STRCMP-SRC1(WS-INDEX:1) <
-                  -   LS-STRCMP-SRC2(WS-INDEX:1)
+                   LS-STRCMP-SRC2(WS-INDEX:1)
+                  IF LS-STRCMP-SRC1(WS-INDEX:1) IS LESS THAN
+                     LS-STRCMP-SRC2(WS-INDEX:1)
                        MOVE -1 TO LS-STRCMP-RETURN
                   ELSE
                        MOVE 1 TO LS-STRCMP-RETURN
@@ -29,5 +29,15 @@
                END-IF
                ADD 1 TO WS-INDEX
            END-PERFORM
-           MOVE 0 TO LS-STRCMP-RETURN
+           IF FUNCTION LENGTH(LS-STRCMP-SRC1) IS GREATER THAN
+               FUNCTION LENGTH(LS-STRCMP-SRC2)
+               MOVE 1 TO LS-STRCMP-RETURN
+           ELSE
+               IF FUNCTION LENGTH(LS-STRCMP-SRC1) IS LESS THAN
+                   FUNCTION LENGTH(LS-STRCMP-SRC2)
+                   MOVE -1 TO LS-STRCMP-RETURN
+               ELSE
+                   MOVE 0 TO LS-STRCMP-RETURN
+               END-IF
+           END-IF
            GOBACK.
