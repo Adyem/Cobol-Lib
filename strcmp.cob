@@ -14,8 +14,9 @@
        01  LS-STRCMP-SRC2          PIC X(255).
        01  LS-STRCMP-SRC2-LENGTH   PIC 9(5) COMP-5.
 
-       PROCEDURE DIVISION USING LS-STRCMP-SRC1 LS-STRCMP-SRC2
-           LS-STRCMP-SRC1-LENGTH LS-STRCMP-SRC2-LENGTH.
+       PROCEDURE DIVISION USING LS-STRCMP-RETURN
+       LS-STRCMP-SRC1 LS-STRCMP-SRC2
+       LS-STRCMP-SRC1-LENGTH LS-STRCMP-SRC2-LENGTH.
            MOVE 1 TO WS-INDEX
            MOVE 0 TO LS-STRCMP-RETURN
 
@@ -33,15 +34,15 @@
                END-IF
                ADD 1 TO WS-INDEX
            END-PERFORM
-           IF FUNCTION LENGTH(LS-STRCMP-SRC1) IS GREATER THAN
-               -    FUNCTION LENGTH(LS-STRCMP-SRC2)
-               MOVE 1 TO LS-STRCMP-RETURN
-           ELSE
-               IF FUNCTION LENGTH(LS-STRCMP-SRC1) IS LESS THAN
-                   -    FUNCTION LENGTH(LS-STRCMP-SRC2)
-                   MOVE -1 TO LS-STRCMP-RETURN
-               ELSE
-                   MOVE 0 TO LS-STRCMP-RETURN
-               END-IF
-           END-IF
-           GOBACK.
+            IF LS-STRCMP-SRC1-LENGTH IS GREATER THAN
+                LS-STRCMP-SRC2-LENGTH
+                MOVE 1 TO LS-STRCMP-RETURN
+            ELSE
+                IF LS-STRCMP-SRC1-LENGTH IS LESS THAN
+                    LS-STRCMP-SRC2-LENGTH
+                    MOVE -1 TO LS-STRCMP-RETURN
+                ELSE
+                    MOVE 0 TO LS-STRCMP-RETURN
+                END-IF
+            END-IF
+            GOBACK.
