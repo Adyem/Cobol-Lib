@@ -18,7 +18,9 @@
                          OR
                          LS-STRLEN-SRC(WS-STRLEN-INDEX:1) = LOW-VALUES
                ADD 1      TO WS-STRLEN-LEN
+               END-ADD
                ADD 1      TO WS-STRLEN-INDEX
+               END-ADD
            END-PERFORM
            MOVE WS-STRLEN-LEN      TO LS-STRLEN-RET
            GOBACK.
