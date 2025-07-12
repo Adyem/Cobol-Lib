@@ -1,18 +1,25 @@
 COBC=cobc
-SRCS=$(wildcard *.cob)
+SRCS=$(filter-out main.cob,$(wildcard *.cob))
 EXEC=library.so
+TEST_EXEC=test_program
 
 all: $(EXEC)
+
+test: $(TEST_EXEC)
+
+$(TEST_EXEC): main.cob $(SRCS)
+	$(COBC) -x -o $@ $^
 
 $(EXEC): $(SRCS)
 	$(COBC) -b -o $@ $^
 
 clean:
-	rm -f *.o
+	rm -f *.o $(TEST_EXEC)
 
 fclean: clean
 	rm -f $(EXEC)
 
 re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re test
+
