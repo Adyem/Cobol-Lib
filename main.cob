@@ -11,6 +11,7 @@
 
        PROCEDURE DIVISION.
            DISPLAY "Running Cobol-Lib tests".
+           END-DISPLAY.
 
            MOVE "   Hello COBOL   " TO WS-STR
            DISPLAY "Before trim: '" WS-STR "'"

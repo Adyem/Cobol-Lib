@@ -8,10 +8,10 @@ all: $(EXEC)
 test: $(TEST_EXEC)
 
 $(TEST_EXEC): main.cob $(SRCS)
-	$(COBC) -x -o $@ $^
+	$(COBC) -Wall -Wextra -Werror -x -o $@ $^
 
 $(EXEC): $(SRCS)
-	$(COBC) -b -o $@ $^
+	$(COBC) -Wall -Wextra -Werror -b -o $@ $^
 
 clean:
 	rm -f *.o $(TEST_EXEC)
