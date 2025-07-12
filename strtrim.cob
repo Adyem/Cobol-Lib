@@ -23,9 +23,9 @@
            PERFORM UNTIL WS-START > WS-END
                MOVE LS-STRTRIM-SRC(WS-START:1) TO WS-CHAR
                IF WS-CHAR = WS-SPACE OR
-            -  WS-CHAR = WS-TAB OR
-            -  WS-CHAR = WS-LF OR
-            -  WS-CHAR = WS-CR
+                  WS-CHAR = WS-TAB OR
+                  WS-CHAR = WS-LF OR
+                  WS-CHAR = WS-CR
                    ADD 1 TO WS-START
                ELSE
                    EXIT PERFORM
@@ -35,9 +35,9 @@
            PERFORM UNTIL WS-END < WS-START
                MOVE LS-STRTRIM-SRC(WS-END:1) TO WS-CHAR
                IF WS-CHAR = WS-SPACE OR
-            -  WS-CHAR = WS-TAB OR
-            -  WS-CHAR = WS-LF OR
-            -  WS-CHAR = WS-CR
+                  WS-CHAR = WS-TAB OR
+                  WS-CHAR = WS-LF OR
+                  WS-CHAR = WS-CR
                    SUBTRACT 1 FROM WS-END
                ELSE
                    EXIT PERFORM
