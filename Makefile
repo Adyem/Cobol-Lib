@@ -25,26 +25,25 @@ endif
 
 # Sources and outputs
 SRCS      := $(filter-out main.cob,$(wildcard *.cob))
-EXEC      := library.so
-TEST_EXEC := test_program
-
-.PHONY: all test clean fclean re print-flags
+EXEC      := program
+LIB       := library.so
+.PHONY: all library clean fclean re print-flags
 
 all: $(EXEC)
 
-test: $(TEST_EXEC)
-
-$(TEST_EXEC): main.cob $(SRCS)
+$(EXEC): main.cob $(SRCS)
 	$(COBC) $(CFLAGS) -x -o $@ $^
 
-$(EXEC): $(SRCS)
+library: $(LIB)
+
+$(LIB): $(SRCS)
 	$(COBC) $(CFLAGS) -b -o $@ $^
 
 clean:
-	rm -f *.o $(TEST_EXEC)
+	rm -f *.o $(EXEC)
 
 fclean: clean
-	rm -f $(EXEC)
+	rm -f $(LIB)
 
 re: fclean all
 
