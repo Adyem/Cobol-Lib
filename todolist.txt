@@ -1,7 +1,5 @@
 Function ideas for expanding the Cobol library. Listed from easy to implement to more complex.
 
-1. **strleft** - Extracts the leftmost N characters from a string. Useful for truncating or obtaining prefixes.
-
 2. **strright** - Returns the rightmost N characters of a string. Handy for file extension or suffix extraction.
 
 3. **toupper** - Converts all lowercase letters in a string to uppercase. Supports basic ASCII characters.
