@@ -6,13 +6,13 @@
        DATA DIVISION.
        WORKING-STORAGE SECTION.
        01  WS-STR-01        PIC X(25).
-       01  WS-LEN-01        PIC 9(3) COMP-5.
+       01  WS-LEN-01        PIC 9(9) COMP-5.
        01  WS-CMP-RET       PIC S9(1) COMP-5.
        01  WS-STRLEFT-RET   PIC X(10).
        01  WS-STRLEFT-RET-L PIC 9(9) COMP-5.
-       01  WS-STRLEFT-LEN   PIC 9(3) COMP-5.
+       01  WS-STRLEFT-LEN   PIC 9(9) COMP-5.
        01  WS-STR-02        PIC X(25).
-       01  WS-LEN-02        PIC 9(3) COMP-5.
+       01  WS-LEN-02        PIC 9(9) COMP-5.
 
        PROCEDURE DIVISION.
            DISPLAY "Running Cobol-Lib tests"
