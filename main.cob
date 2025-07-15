@@ -76,7 +76,7 @@
                WS-STRLEFT-LEN
                WS-STRLEFT-RET
                WS-STRLEFT-RET-L
-           DISPLAY "strleft string " WS-STR-01
+           DISPLAY "strright string " WS-STR-01
            DISPLAY WS-STRLEFT-RET
 
            STOP RUN.
