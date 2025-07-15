@@ -65,5 +65,19 @@
            DISPLAY "strleft string " WS-STR-01
            DISPLAY WS-STRLEFT-RET
 
+           DISPLAY ""
+           MOVE "Hello world" TO WS-STR-01
+           MOVE LENGTH OF WS-STR-01 TO WS-LEN-01
+           MOVE LENGTH OF WS-STRLEFT-RET TO WS-STRLEFT-RET-L
+           MOVE 5 TO WS-STRLEFT-LEN
+           CALL 'STRRIGHT' USING
+               WS-STR-01
+               WS-LEN-01
+               WS-STRLEFT-LEN
+               WS-STRLEFT-RET
+               WS-STRLEFT-RET-L
+           DISPLAY "strleft string " WS-STR-01
+           DISPLAY WS-STRLEFT-RET
+
            STOP RUN.
        END PROGRAM MAIN.
