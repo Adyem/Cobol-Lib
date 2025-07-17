@@ -1,9 +1,5 @@
 Function ideas for expanding the Cobol library. Listed from easy to implement to more complex.
 
-3. **toupper** - Converts all lowercase letters in a string to uppercase. Supports basic ASCII characters.
-
-4. **tolower** - Converts all uppercase letters in a string to lowercase. Useful for case-insensitive comparisons.
-
 5. **strpad** - Pads a string with spaces or a specified character to a desired length. Optionally left or right justify.
 
 6. **strpos** - Returns the position of a substring within another string. If not found, returns zero.
@@ -15,4 +11,3 @@ Function ideas for expanding the Cobol library. Listed from easy to implement to
 9. **format-number** - Formats a numeric value as a string with commas or other separators. Handles decimals.
 
 10. **datetime-format** - Given a COBOL date/time structure, outputs a formatted string, e.g., YYYY-MM-DD HH:MM:SS. This involves various data conversions and validations.
-
