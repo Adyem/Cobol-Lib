@@ -68,7 +68,7 @@
            DISPLAY ""
            MOVE "Hello world" TO WS-STR-01
            MOVE LENGTH OF WS-STR-01 TO WS-LEN-01
-           MOVE LENGTH OF WS-STRLEFT-RET TO WS-STRLEFT-RET-L
+           MOVE LENGTH OF WS-STR-01 TO WS-STRLEFT-RET-L
            MOVE 5 TO WS-STRLEFT-LEN
            CALL 'STRRIGHT' USING
                WS-STR-01
@@ -79,5 +79,10 @@
            DISPLAY "strright string " WS-STR-01
            DISPLAY WS-STRLEFT-RET
 
+           MOVE "Hello world" TO WS-STR-01
+           MOVE LENGTH OF WS-STR-01 TO WS-LEN-01
+           CALL 'TOUPPER' USING WS-STR-01 WS-LEN-01
+           DISPLAY " "
+           DISPLAY "to upper: " WS-STR-01
            STOP RUN.
        END PROGRAM MAIN.
