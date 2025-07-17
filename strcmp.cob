@@ -5,7 +5,7 @@
 
        DATA DIVISION.
        WORKING-STORAGE SECTION.
-       01  WS-INDEX           PIC 9(9) COMP-5.
+       01  WS-INDEX                PIC 9(9) COMP-5.
 
        LINKAGE SECTION.
        01  LS-STRCMP-RETURN        PIC S9(9) COMP-5.
