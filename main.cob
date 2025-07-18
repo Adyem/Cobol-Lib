@@ -37,7 +37,7 @@
                WS-LEN-02
            DISPLAY "STRCMP result: " WS-CMP-RET
 
-           DISPLAY ""
+           DISPLAY " "
            MOVE "Test 2 " TO WS-STR-01
            MOVE "Hello another world" TO WS-STR-02
            DISPLAY "New test"
@@ -51,7 +51,7 @@
                WS-LEN-02
            DISPLAY "STRCMP result 02: " WS-CMP-RET
 
-           DISPLAY ""
+           DISPLAY " "
            MOVE "Hello world" TO WS-STR-01
            MOVE LENGTH OF WS-STR-01 TO WS-LEN-01
            MOVE LENGTH OF WS-STRLEFT-RET TO WS-STRLEFT-RET-L
@@ -65,7 +65,7 @@
            DISPLAY "strleft string " WS-STR-01
            DISPLAY WS-STRLEFT-RET
 
-           DISPLAY ""
+           DISPLAY " "
            MOVE "Hello world" TO WS-STR-01
            MOVE LENGTH OF WS-STR-01 TO WS-LEN-01
            MOVE LENGTH OF WS-STR-01 TO WS-STRLEFT-RET-L
@@ -81,8 +81,15 @@
 
            MOVE "Hello world" TO WS-STR-01
            MOVE LENGTH OF WS-STR-01 TO WS-LEN-01
+           DISPLAY "to upper before: " WS-STR-01 WS-LEN-01
            CALL 'TOUPPER' USING WS-STR-01 WS-LEN-01
-           DISPLAY " "
            DISPLAY "to upper: " WS-STR-01
+
+           MOVE "HELLO WORLD" TO WS-STR-01
+           MOVE LENGTH OF WS-STR-01 TO WS-LEN-01
+           DISPLAY " "
+           DISPLAY "to lower before: " WS-STR-01 WS-LEN-01
+           CALL 'TOLOWER' USING WS-STR-01 WS-LEN-01
+           DISPLAY "to lower: " WS-STR-01
            STOP RUN.
        END PROGRAM MAIN.
