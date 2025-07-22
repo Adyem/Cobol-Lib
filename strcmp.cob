@@ -1,50 +1,51 @@
        IDENTIFICATION DIVISION.
-       FUNCTION‑ID. STRCMP.
+       FUNCTION-ID. STRCMP.
 
        ENVIRONMENT DIVISION.
+
        DATA DIVISION.
-       LINKAGE SECTION.
-       01  LS‑SRC1‑STR        PIC X(255).
-       01  LS‑SRC1‑LEN        PIC 9(5) COMP-5.
-       01  LS‑SRC2‑STR        PIC X(255).
-       01  LS‑SRC2‑LEN        PIC 9(5) COMP-5.
-
-       PROCEDURE DIVISION
-         USING LS‑SRC1‑STR      LS‑SRC1‑LEN
-               LS‑SRC2‑STR      LS‑SRC2‑LEN
-         RETURNING RETURN-CODE
        LOCAL-STORAGE SECTION.
-       01  WS-INDEX            PIC 9(9) COMP-5.
+       01  WS-INDEX                PIC 9(9) COMP-5.
 
+       LINKAGE SECTION.
+       01  LS-STRCMP-SRC1          PIC X(255).
+       01  LS-STRCMP-SRC1-LENGTH   PIC 9(5) COMP-5.
+       01  LS-STRCMP-SRC2          PIC X(255).
+       01  LS-STRCMP-SRC2-LENGTH   PIC 9(5) COMP-5.
+       01  LS-STRCMP-RETURN        PIC S9(9) COMP-5.
+
+       PROCEDURE DIVISION USING
+           LS-STRCMP-SRC1 LS-STRCMP-SRC1-LENGTH
+           LS-STRCMP-SRC2 LS-STRCMP-SRC2-LENGTH
+           RETURNING LS-STRCMP-RETURN.
            MOVE 1 TO WS-INDEX
-           MOVE 0 TO RETURN-CODE
+           MOVE 0 TO LS-STRCMP-RETURN
 
-           PERFORM UNTIL WS-INDEX > LS‑SRC1‑LEN
-                            OR WS-INDEX > LS‑SRC2‑LEN
-               IF LS‑SRC1‑STR(WS‑INDEX:1)
-                    IS NOT EQUAL TO
-                  LS‑SRC2‑STR(WS‑INDEX:1)
-                  IF LS‑SRC1‑STR(WS‑INDEX:1)
-                       IS LESS THAN
-                     LS‑SRC2‑STR(WS‑INDEX:1)
-                     MOVE -1 TO RETURN-CODE
+           PERFORM UNTIL WS-INDEX > LS-STRCMP-SRC1-LENGTH OR
+                -    WS-INDEX > LS-STRCMP-SRC2-LENGTH 
+                IF LS-STRCMP-SRC1(WS-INDEX:1) IS NOT EQUAL TO
+                   LS-STRCMP-SRC2(WS-INDEX:1)
+                  IF LS-STRCMP-SRC1(WS-INDEX:1) IS LESS THAN
+                     LS-STRCMP-SRC2(WS-INDEX:1)
+                       MOVE -1 TO LS-STRCMP-RETURN
                   ELSE
-                     MOVE 1 TO RETURN-CODE
-                  END‑IF
+                       MOVE 1 TO LS-STRCMP-RETURN
+                  END-IF
                   GOBACK
-               END‑IF
+               END-IF
                ADD 1 TO WS-INDEX
-           END‑PERFORM
-
-           IF LS‑SRC1‑LEN > LS‑SRC2‑LEN
-              MOVE 1 TO RETURN-CODE
+               END-ADD
+           END-PERFORM
+           IF LS-STRCMP-SRC1-LENGTH IS GREATER THAN
+                LS-STRCMP-SRC2-LENGTH
+                MOVE 1 TO LS-STRCMP-RETURN
            ELSE
-             IF LS‑SRC1‑LEN < LS‑SRC2‑LEN
-               MOVE -1 TO RETURN-CODE
-             ELSE
-               MOVE 0 TO RETURN-CODE
-             END‑IF
-           END‑IF
-
+                IF LS-STRCMP-SRC1-LENGTH IS LESS THAN
+                    LS-STRCMP-SRC2-LENGTH
+                    MOVE -1 TO LS-STRCMP-RETURN
+                ELSE
+                    MOVE 0 TO LS-STRCMP-RETURN
+                END-IF
+           END-IF
            GOBACK.
        END FUNCTION STRCMP.
