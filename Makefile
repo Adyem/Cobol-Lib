@@ -1,55 +1,52 @@
-# Detect OS environment
-ifeq ($(OS),Windows_NT)
-	detected_OS := Windows
-else
-	detected_OS := $(shell uname -s)
-endif
+### Simplified Makefile for CobolLib (Fixed Link & Warnings)
 
-# Compiler settings
+```makefile
+# Compiler and linker settings
 COBC    := cobc
-CFLAGS  := -Wall
-LDFLAGS :=
+CC      := cc
+CFLAGS  := -Wall -g -U_FORTIFY_SOURCE   # Add -U to undefine duplicate _FORTIFY_SOURCE
+LDFLAGS := -lcobc                     # Link against the COBOL runtime
 
-# On Windows, define WIN32 and guard against duplicate typedefs
-ifeq ($(detected_OS),Windows)
-	# Prevent MinGW corecrt.h typedef conflicts by injecting semicolons
-	CFLAGS += -DWIN32 \
-	          -D__MINGW_EXTENSION=";" \
-	          -DHAVE_SIZE_T \
-	          -DHAVE_SSIZE_T \
-	          -DHAVE_INTPTR_T \
-	          -DHAVE_UINTPTR_T \
-	          -DHAVE_PTRDIFF_T \
-	          -DHAVE___TIME64_T
-endif
+# Build directories
+OBJDIR := objs
+# Hardcoded source files
+SOURCES := \
+    main.cob \
+    strcmp.cob \
+    strleft.cob \
+    strlen.cob \
+    strpos.cob \
+    strright.cob \
+    strtrim.cob \
+    tolower.cob \
+    toupper.cob
 
-# Sources and outputs
-SRCS      := $(filter-out main.cob,$(wildcard *.cob))
-EXEC      := program
-LIB       := library.so
-.PHONY: all library clean fclean re print-flags
+# Derived object files
+OBJS := $(patsubst %.cob,$(OBJDIR)/%.o,$(SOURCES))
 
+# Final executable name
+EXEC := program
+
+.PHONY: all clean re
+
+# Default target: build the executable
 all: $(EXEC)
 
-$(EXEC): main.cob $(SRCS)
-	$(COBC) $(CFLAGS) -x -o $@ $^
+# Link step: use 'cc' to ensure COBOL runtime is included
+$(EXEC): $(OBJS)
+	$(CC) $^ $(LDFLAGS) -o $@
 
-library: $(LIB)
+# Compile each COBOL source into objs/*.o
+$(OBJDIR)/%.o: %.cob | $(OBJDIR)
+	$(COBC) $(CFLAGS) -c -o $@ $<
 
-$(LIB): $(SRCS)
-	$(COBC) $(CFLAGS) -b -o $@ $^
+# Ensure the objs directory exists
+$(OBJDIR):
+	mkdir -p $@
 
+# Remove objects and executable
 clean:
-	rm -f *.o $(EXEC)
+	rm -rf $(OBJDIR) $(EXEC)
 
-fclean: clean
-	rm -f $(LIB)
-
-re: fclean all
-
-# Debug target to inspect flags
-default: print-flags
-
-print-flags:
-	@echo "Detected OS: $(detected_OS)"
-	@echo "COBC flags: $(CFLAGS)"
+# Rebuild from scratch
+re: clean all
