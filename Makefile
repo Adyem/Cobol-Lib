@@ -1,13 +1,16 @@
-# Simplified Makefile for CobolLib
-# Compiler and linker settings
-COBC    := cobc
-CC      := cc
-CFLAGS  := -Wall -g
+# ───────────────────────────────────────────
+# Makefile for CobolLib — temps in objs/, clean root
+# ───────────────────────────────────────────
+
+# Compiler settings
+COBC       := cobc
+COBCFLAGS  := -Wall -g
 
 # Build directories
-OBJDIR := objs
-# Hardcoded source files
-SOURCES := \
+OBJDIR     := objs
+
+# Your COBOL sources
+SOURCES    := \
     main.cob \
     strcmp.cob \
     strleft.cob \
@@ -18,40 +21,40 @@ SOURCES := \
     tolower.cob \
     toupper.cob
 
-# Derived object files
-OBJS := $(patsubst %.cob,$(OBJDIR)/%.o,$(SOURCES))
+# Corresponding object files
+OBJS       := $(SOURCES:%.cob=$(OBJDIR)/%.o)
 
-# Final executable name
-EXEC := program
+# Final executable
+EXEC       := program
 
 .PHONY: all clean re
 
-# Default target: build the executable
+# Default: build the program
 all: $(EXEC)
 
-# Link step using cobc to include the COBOL runtime
+# Link step: generate temps into OBJDIR, then move any strays
 $(EXEC): $(OBJS)
-	$(COBC) -x $^ -o $@
+	@echo "Linking $@..."
+	@TMPDIR=$(OBJDIR) $(COBC) -x $(COBCFLAGS) -o $@ $(SOURCES)
+	@mv ./*.c ./*.h ./*.i $(OBJDIR)/ 2>/dev/null || true
 
-# Compile main program with -x to generate a C file containing 'main'
-$(OBJDIR)/main.o: main.cob | $(OBJDIR)
-	$(COBC) -x -C -o $(OBJDIR)/main.c $<
-	$(CC) $(CFLAGS) -c $(OBJDIR)/main.c -o $@
-
-# Compile other modules to C and then to objects
+# Compile each .cob → .o; temps go in OBJDIR, then move any strays
 $(OBJDIR)/%.o: %.cob | $(OBJDIR)
-	$(COBC) -m -C -o $(OBJDIR)/$*.c $<
+	@echo "Compiling $<..."
+	@TMPDIR=$(OBJDIR) $(COBC) -c $(COBCFLAGS) -o $@ $<
+	@mv $(basename $<).c \
+	    $(basename $<).h \
+	    $(basename $<).i \
+	    $(OBJDIR)/ 2>/dev/null || true
 
-	$(CC) $(CFLAGS) -c $(OBJDIR)/$*.c -o $@
-
-# Ensure the objs directory exists
+# Ensure the output dir exists
 $(OBJDIR):
-	mkdir -p $@
+	@mkdir -p $@
 
-# Remove objects and executable
+# Remove everything
 clean:
-	rm -rf $(OBJDIR) $(EXEC)
+	@echo "Cleaning..."
+	@rm -rf $(OBJDIR) $(EXEC)
 
 # Rebuild from scratch
 re: clean all
-
