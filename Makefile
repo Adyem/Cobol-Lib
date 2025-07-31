@@ -1,10 +1,8 @@
-### Simplified Makefile for CobolLib (Fixed Link & Warnings)
-
-```makefile
+# Simplified Makefile for CobolLib (Fixed Link & Warnings)
 # Compiler and linker settings
 COBC    := cobc
 CC      := cc
-CFLAGS  := -Wall -g -U_FORTIFY_SOURCE   # Add -U to undefine duplicate _FORTIFY_SOURCE
+CFLAGS  := -Wall -g   # Add -U to undefine duplicate _FORTIFY_SOURCE
 LDFLAGS := -lcobc                     # Link against the COBOL runtime
 
 # Build directories
@@ -38,7 +36,8 @@ $(EXEC): $(OBJS)
 
 # Compile each COBOL source into objs/*.o
 $(OBJDIR)/%.o: %.cob | $(OBJDIR)
-	$(COBC) $(CFLAGS) -c -o $@ $<
+	$(COBC) -C -o $(OBJDIR)/$*.c $<
+	$(CC) $(CFLAGS) -c $(OBJDIR)/$*.c -o $@
 
 # Ensure the objs directory exists
 $(OBJDIR):
@@ -50,3 +49,4 @@ clean:
 
 # Rebuild from scratch
 re: clean all
+
