@@ -41,6 +41,7 @@ $(OBJDIR)/main.o: main.cob | $(OBJDIR)
 # Compile other modules to C and then to objects
 $(OBJDIR)/%.o: %.cob | $(OBJDIR)
 	$(COBC) -m -C -o $(OBJDIR)/$*.c $<
+
 	$(CC) $(CFLAGS) -c $(OBJDIR)/$*.c -o $@
 
 # Ensure the objs directory exists
