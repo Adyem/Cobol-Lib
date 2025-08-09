@@ -21,7 +21,7 @@
            MOVE 1 TO WS-INDEX
            MOVE 0 TO LS-STRCMP-RETURN
 
-       PERFORM UNTIL WS-INDEX > LS-STRCMP-SRC1-LEN OR
+           PERFORM UNTIL WS-INDEX > LS-STRCMP-SRC1-LEN OR
                 -    WS-INDEX > LS-STRCMP-SRC2-LEN
                IF LS-STRCMP-SRC1-BUF(WS-INDEX:1) IS NOT EQUAL TO
                    LS-STRCMP-SRC2-BUF(WS-INDEX:1)
@@ -37,15 +37,15 @@
                ADD 1 TO WS-INDEX
                END-ADD
            END-PERFORM
-       IF LS-STRCMP-SRC1-LEN IS GREATER THAN
+           IF LS-STRCMP-SRC1-LEN IS GREATER THAN
                 LS-STRCMP-SRC2-LEN
                 MOVE 1 TO LS-STRCMP-RETURN
-       ELSE
+           ELSE
                 IF LS-STRCMP-SRC1-LEN IS LESS THAN
                     LS-STRCMP-SRC2-LEN
                     MOVE -1 TO LS-STRCMP-RETURN
                 ELSE
                     MOVE 0 TO LS-STRCMP-RETURN
                 END-IF
-       END-IF
+           END-IF
            GOBACK.
