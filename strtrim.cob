@@ -14,10 +14,9 @@
        01    WS-CHAR             PIC X.
 
        LINKAGE SECTION.
-       COPY "STRING.cpy" REPLACING
-                     ==MY-STRING== BY ==LS-STRTRIM-SRC==
-                     ==MY-LEN== BY ==LS-STRTRIM-SRC-LEN==
-                     ==MY-BUF== BY ==LS-STRTRIM-SRC-BUF==.
+       01  LS-STRTRIM-SRC.
+           05  LS-STRTRIM-SRC-LEN PIC 9(4) COMP.
+           05  LS-STRTRIM-SRC-BUF PIC X(256).
 
        PROCEDURE DIVISION USING LS-STRTRIM-SRC.
            MOVE 1       TO WS-START
@@ -25,6 +24,7 @@
 
            PERFORM UNTIL WS-START > WS-END
                MOVE LS-STRTRIM-SRC-BUF(WS-START:1) TO WS-CHAR
+
                IF WS-CHAR = WS-SPACE OR
                   WS-CHAR = WS-TAB OR
                   WS-CHAR = WS-LF OR
@@ -38,6 +38,7 @@
 
            PERFORM UNTIL WS-END < WS-START
                MOVE LS-STRTRIM-SRC-BUF(WS-END:1) TO WS-CHAR
+
                IF WS-CHAR = WS-SPACE OR
                   WS-CHAR = WS-TAB OR
                   WS-CHAR = WS-LF OR
@@ -54,6 +55,7 @@
            PERFORM UNTIL WS-INDEX > WS-END
                MOVE LS-STRTRIM-SRC-BUF(WS-INDEX:1) TO WS-CHAR
                MOVE WS-CHAR TO LS-STRTRIM-SRC-BUF(WS-DEST-INDEX:1)
+
                ADD 1 TO WS-INDEX
                END-ADD
                ADD 1 TO WS-DEST-INDEX

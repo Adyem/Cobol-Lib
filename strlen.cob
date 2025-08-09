@@ -7,10 +7,9 @@
        01  WS-CHAR             PIC X.
 
        LINKAGE SECTION.
-       COPY "STRING.cpy" REPLACING
-                     ==MY-STRING== BY ==LS-STRING==
-                     ==MY-LEN== BY ==LS-STRING-LEN==
-                     ==MY-BUF== BY ==LS-STRING-BUF==.
+       01  LS-STRING.
+           05  LS-STRING-LEN PIC 9(4) COMP.
+           05  LS-STRING-BUF PIC X(256).
 
        PROCEDURE DIVISION USING LS-STRING.
            MOVE 0 TO LS-STRING-LEN

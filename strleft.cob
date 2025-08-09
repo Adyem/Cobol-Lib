@@ -8,14 +8,12 @@
        01   WS-INDEX                PIC 9(9) COMP-5.
 
        LINKAGE SECTION.
-       COPY "STRING.cpy" REPLACING
-                     ==MY-STRING== BY ==LS-STRLEFT-STR1==
-                     ==MY-LEN== BY ==LS-STRLEFT-STR1-LEN==
-                     ==MY-BUF== BY ==LS-STRLEFT-STR1-BUF==.
-       COPY "STRING.cpy" REPLACING
-                     ==MY-STRING== BY ==LS-STRLEFT-RETURN==
-                     ==MY-LEN== BY ==LS-STRLEFT-RETURN-LEN==
-                     ==MY-BUF== BY ==LS-STRLEFT-RETURN-BUF==.
+       01  LS-STRLEFT-STR1.
+           05  LS-STRLEFT-STR1-LEN  PIC 9(4) COMP.
+           05  LS-STRLEFT-STR1-BUF  PIC X(256).
+       01  LS-STRLEFT-RETURN.
+           05  LS-STRLEFT-RETURN-LEN PIC 9(4) COMP.
+           05  LS-STRLEFT-RETURN-BUF PIC X(256).
        01   LS-STRLEFT-AMOUNT       PIC 9(9) COMP-5.
 
        PROCEDURE DIVISION USING LS-STRLEFT-STR1 LS-STRLEFT-AMOUNT

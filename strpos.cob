@@ -9,14 +9,12 @@
        01  WS-IN          PIC 9(9) COMP-5.
 
        LINKAGE SECTION.
-       COPY "STRING.cpy" REPLACING
-                     ==MY-STRING== BY ==LS-STR==
-                     ==MY-LEN== BY ==LS-STR-LEN==
-                     ==MY-BUF== BY ==LS-STR-BUF==.
-       COPY "STRING.cpy" REPLACING
-                     ==MY-STRING== BY ==LS-SUB==
-                     ==MY-LEN== BY ==LS-SUB-LEN==
-                     ==MY-BUF== BY ==LS-SUB-BUF==.
+       01  LS-STR.
+           05  LS-STR-LEN PIC 9(4) COMP.
+           05  LS-STR-BUF PIC X(256).
+       01  LS-SUB.
+           05  LS-SUB-LEN PIC 9(4) COMP.
+           05  LS-SUB-BUF PIC X(256).
        01  LS-RETURN      PIC 9(9) COMP-5.
 
        PROCEDURE DIVISION USING
@@ -48,5 +46,4 @@
                    END-IF
                END-IF
            END-PERFORM
-
            GOBACK.

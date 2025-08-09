@@ -9,14 +9,12 @@
 
        LINKAGE SECTION.
        01  LS-STRCMP-RETURN        PIC S9(9) COMP-5.
-       COPY "STRING.cpy" REPLACING
-                     ==MY-STRING== BY ==LS-STRCMP-SRC1==
-                     ==MY-LEN== BY ==LS-STRCMP-SRC1-LEN==
-                     ==MY-BUF== BY ==LS-STRCMP-SRC1-BUF==.
-       COPY "STRING.cpy" REPLACING
-                     ==MY-STRING== BY ==LS-STRCMP-SRC2==
-                     ==MY-LEN== BY ==LS-STRCMP-SRC2-LEN==
-                     ==MY-BUF== BY ==LS-STRCMP-SRC2-BUF==.
+       01  LS-STRCMP-SRC1.
+           05  LS-STRCMP-SRC1-LEN  PIC 9(4) COMP.
+           05  LS-STRCMP-SRC1-BUF  PIC X(256).
+       01  LS-STRCMP-SRC2.
+           05  LS-STRCMP-SRC2-LEN  PIC 9(4) COMP.
+           05  LS-STRCMP-SRC2-BUF  PIC X(256).
 
        PROCEDURE DIVISION USING LS-STRCMP-RETURN
            LS-STRCMP-SRC1 LS-STRCMP-SRC2.
@@ -29,6 +27,7 @@
                    LS-STRCMP-SRC2-BUF(WS-INDEX:1)
                   IF LS-STRCMP-SRC1-BUF(WS-INDEX:1) IS LESS THAN
                      LS-STRCMP-SRC2-BUF(WS-INDEX:1)
+
                        MOVE -1 TO LS-STRCMP-RETURN
                   ELSE
                        MOVE 1 TO LS-STRCMP-RETURN

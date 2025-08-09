@@ -10,14 +10,12 @@
        01   WS-RETURN-INDEX         PIC 9(9) COMP-5.
 
        LINKAGE SECTION.
-       COPY "STRING.cpy" REPLACING
-                     ==MY-STRING== BY ==LS-STRRIGHT-STR1==
-                     ==MY-LEN== BY ==LS-STRRIGHT-STR1-LEN==
-                     ==MY-BUF== BY ==LS-STRRIGHT-STR1-BUF==.
-       COPY "STRING.cpy" REPLACING
-                     ==MY-STRING== BY ==LS-STRRIGHT-RETURN==
-                     ==MY-LEN== BY ==LS-STRRIGHT-RETURN-LEN==
-                     ==MY-BUF== BY ==LS-STRRIGHT-RETURN-BUF==.
+       01  LS-STRRIGHT-STR1.
+           05  LS-STRRIGHT-STR1-LEN  PIC 9(4) COMP.
+           05  LS-STRRIGHT-STR1-BUF  PIC X(256).
+       01  LS-STRRIGHT-RETURN.
+           05  LS-STRRIGHT-RETURN-LEN PIC 9(4) COMP.
+           05  LS-STRRIGHT-RETURN-BUF PIC X(256).
        01   LS-STRRIGHT-AMOUNT       PIC 9(9) COMP-5.
 
        PROCEDURE DIVISION USING LS-STRRIGHT-STR1 LS-STRRIGHT-AMOUNT
@@ -32,6 +30,7 @@
                       WS-CHAR-COPIED = LS-STRRIGHT-AMOUNT
                MOVE LS-STRRIGHT-STR1-BUF(WS-INDEX:1)
                    TO LS-STRRIGHT-RETURN-BUF(WS-RETURN-INDEX:1)
+
                SUBTRACT 1 FROM WS-INDEX
                SUBTRACT 1 FROM WS-RETURN-INDEX
                ADD 1 TO WS-CHAR-COPIED
