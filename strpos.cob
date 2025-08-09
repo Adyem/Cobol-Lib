@@ -9,15 +9,16 @@
        01  WS-IN          PIC 9(9) COMP-5.
 
        LINKAGE SECTION.
-       01  LS-STR         PIC X(255).
-       01  LS-STR-LEN     PIC 9(9) COMP-5.
-       01  LS-SUB         PIC X(255).
-       01  LS-SUB-LEN     PIC 9(9) COMP-5.
+       COPY STRING REPLACING ==MY-STRING== BY ==LS-STR==
+                     ==MY-LEN== BY ==LS-STR-LEN==
+                     ==MY-BUF== BY ==LS-STR-BUF==.
+       COPY STRING REPLACING ==MY-STRING== BY ==LS-SUB==
+                     ==MY-LEN== BY ==LS-SUB-LEN==
+                     ==MY-BUF== BY ==LS-SUB-BUF==.
        01  LS-RETURN      PIC 9(9) COMP-5.
 
        PROCEDURE DIVISION USING
-           LS-STR        LS-STR-LEN
-           LS-SUB        LS-SUB-LEN
+           LS-STR        LS-SUB
            LS-RETURN.
 
            MOVE 0 TO LS-RETURN
@@ -25,14 +26,14 @@
            PERFORM VARYING WS-OUT FROM 1 BY 1
                    UNTIL WS-OUT > LS-STR-LEN
 
-               IF LS-STR(WS-OUT:1) = LS-SUB(1:1)
+               IF LS-STR-BUF(WS-OUT:1) = LS-SUB-BUF(1:1)
                    MOVE 1 TO WS-IN
                    PERFORM UNTIL
                           WS-IN   > LS-SUB-LEN
                        OR WS-OUT + WS-IN - 1 > LS-STR-LEN
 
-                       IF LS-STR(WS-OUT + WS-IN - 1:1)
-                          NOT = LS-SUB(WS-IN:1)
+                       IF LS-STR-BUF(WS-OUT + WS-IN - 1:1)
+                          NOT = LS-SUB-BUF(WS-IN:1)
                            EXIT PERFORM
                        END-IF
 
