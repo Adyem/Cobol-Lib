@@ -30,6 +30,7 @@
                       WS-CHAR-COPIED = LS-STRRIGHT-AMOUNT
                MOVE LS-STRRIGHT-STR1-BUF(WS-INDEX:1)
                    TO LS-STRRIGHT-RETURN-BUF(WS-RETURN-INDEX:1)
+
                SUBTRACT 1 FROM WS-INDEX
                SUBTRACT 1 FROM WS-RETURN-INDEX
                ADD 1 TO WS-CHAR-COPIED

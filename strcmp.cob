@@ -27,6 +27,7 @@
                    LS-STRCMP-SRC2-BUF(WS-INDEX:1)
                   IF LS-STRCMP-SRC1-BUF(WS-INDEX:1) IS LESS THAN
                      LS-STRCMP-SRC2-BUF(WS-INDEX:1)
+
                        MOVE -1 TO LS-STRCMP-RETURN
                   ELSE
                        MOVE 1 TO LS-STRCMP-RETURN

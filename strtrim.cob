@@ -24,6 +24,7 @@
 
            PERFORM UNTIL WS-START > WS-END
                MOVE LS-STRTRIM-SRC-BUF(WS-START:1) TO WS-CHAR
+
                IF WS-CHAR = WS-SPACE OR
                   WS-CHAR = WS-TAB OR
                   WS-CHAR = WS-LF OR
@@ -37,6 +38,7 @@
 
            PERFORM UNTIL WS-END < WS-START
                MOVE LS-STRTRIM-SRC-BUF(WS-END:1) TO WS-CHAR
+
                IF WS-CHAR = WS-SPACE OR
                   WS-CHAR = WS-TAB OR
                   WS-CHAR = WS-LF OR
@@ -53,6 +55,7 @@
            PERFORM UNTIL WS-INDEX > WS-END
                MOVE LS-STRTRIM-SRC-BUF(WS-INDEX:1) TO WS-CHAR
                MOVE WS-CHAR TO LS-STRTRIM-SRC-BUF(WS-DEST-INDEX:1)
+
                ADD 1 TO WS-INDEX
                END-ADD
                ADD 1 TO WS-DEST-INDEX
