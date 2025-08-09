@@ -14,14 +14,17 @@
        01    WS-CHAR             PIC X.
 
        LINKAGE SECTION.
-       01   LS-STRTRIM-SRC       PIC X(255).
+       COPY "STRING.cpy" REPLACING
+                     ==MY-STRING== BY ==LS-STRTRIM-SRC==
+                     ==MY-LEN== BY ==LS-STRTRIM-SRC-LEN==
+                     ==MY-BUF== BY ==LS-STRTRIM-SRC-BUF==.
 
        PROCEDURE DIVISION USING LS-STRTRIM-SRC.
            MOVE 1       TO WS-START
-           MOVE LENGTH OF LS-STRTRIM-SRC TO WS-END
+           MOVE LS-STRTRIM-SRC-LEN TO WS-END
 
            PERFORM UNTIL WS-START > WS-END
-               MOVE LS-STRTRIM-SRC(WS-START:1) TO WS-CHAR
+               MOVE LS-STRTRIM-SRC-BUF(WS-START:1) TO WS-CHAR
                IF WS-CHAR = WS-SPACE OR
                   WS-CHAR = WS-TAB OR
                   WS-CHAR = WS-LF OR
@@ -34,7 +37,7 @@
            END-PERFORM
 
            PERFORM UNTIL WS-END < WS-START
-               MOVE LS-STRTRIM-SRC(WS-END:1) TO WS-CHAR
+               MOVE LS-STRTRIM-SRC-BUF(WS-END:1) TO WS-CHAR
                IF WS-CHAR = WS-SPACE OR
                   WS-CHAR = WS-TAB OR
                   WS-CHAR = WS-LF OR
@@ -49,17 +52,19 @@
            MOVE 1 TO WS-DEST-INDEX
            MOVE WS-START TO WS-INDEX
            PERFORM UNTIL WS-INDEX > WS-END
-               MOVE LS-STRTRIM-SRC(WS-INDEX:1) TO WS-CHAR
-               MOVE WS-CHAR TO LS-STRTRIM-SRC(WS-DEST-INDEX:1)
+               MOVE LS-STRTRIM-SRC-BUF(WS-INDEX:1) TO WS-CHAR
+               MOVE WS-CHAR TO LS-STRTRIM-SRC-BUF(WS-DEST-INDEX:1)
                ADD 1 TO WS-INDEX
                END-ADD
                ADD 1 TO WS-DEST-INDEX
                END-ADD
            END-PERFORM
 
-           PERFORM UNTIL WS-DEST-INDEX > LENGTH OF LS-STRTRIM-SRC
-               MOVE WS-SPACE TO LS-STRTRIM-SRC(WS-DEST-INDEX:1)
+           PERFORM UNTIL WS-DEST-INDEX > LENGTH OF LS-STRTRIM-SRC-BUF
+               MOVE WS-SPACE TO LS-STRTRIM-SRC-BUF(WS-DEST-INDEX:1)
                ADD 1 TO WS-DEST-INDEX
                END-ADD
            END-PERFORM
+           MOVE WS-DEST-INDEX TO LS-STRTRIM-SRC-LEN
+           SUBTRACT 1 FROM LS-STRTRIM-SRC-LEN
            GOBACK.

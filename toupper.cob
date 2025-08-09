@@ -7,11 +7,13 @@
        WORKING-STORAGE SECTION.
 
        LINKAGE SECTION.
-       01   LS-TOUPPER-SRC         PIC X(255).
-       01   LS-TOUPPER-LEN         PIC 9(9) COMP-5.
+       COPY "STRING.cpy" REPLACING
+                     ==MY-STRING== BY ==LS-TOUPPER-SRC==
+                     ==MY-LEN== BY ==LS-TOUPPER-SRC-LEN==
+                     ==MY-BUF== BY ==LS-TOUPPER-SRC-BUF==.
 
-       PROCEDURE DIVISION USING LS-TOUPPER-SRC LS-TOUPPER-LEN.
-           INSPECT LS-TOUPPER-SRC(1:LS-TOUPPER-LEN) CONVERTING
+       PROCEDURE DIVISION USING LS-TOUPPER-SRC.
+           INSPECT LS-TOUPPER-SRC-BUF(1:LS-TOUPPER-SRC-LEN) CONVERTING
                "abcdefghijklmnopqrstuvwxyz" TO
                "ABCDEFGHIJKLMNOPQRSTUVWXYZ".
            GOBACK.
