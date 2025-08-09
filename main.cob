@@ -69,7 +69,7 @@
                WS-STR-01
                WS-STRLEFT-LEN
                WS-STRLEFT-RET
-           DISPLAY "strright string " WS-STR-01-BUF(1:WS-STR-01-LEN)
+           DISPLAY "strright string " WS-STR-01-BUF
            DISPLAY WS-STRLEFT-RET-BUF(1:WS-STRLEFT-RET-LEN)
 
            MOVE "Hello world" TO WS-STR-01-BUF
@@ -77,7 +77,7 @@
            DISPLAY "to upper before: " WS-STR-01-BUF(1:WS-STR-01-LEN)
       -       WS-STR-01-LEN
            CALL 'TOUPPER' USING WS-STR-01
-           DISPLAY "to upper: " WS-STR-01-BUF(1:WS-STR-01-LEN)
+           DISPLAY "to upper: " WS-STR-01-BUF
 
            MOVE "HELLO WORLD" TO WS-STR-01-BUF
            MOVE FUNCTION LENGTH("HELLO WORLD") TO WS-STR-01-LEN
