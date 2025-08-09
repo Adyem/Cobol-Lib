@@ -14,7 +14,8 @@
        01    WS-CHAR             PIC X.
 
        LINKAGE SECTION.
-       COPY STRING REPLACING ==MY-STRING== BY ==LS-STRTRIM-SRC==
+       COPY "STRING.cpy" REPLACING
+                     ==MY-STRING== BY ==LS-STRTRIM-SRC==
                      ==MY-LEN== BY ==LS-STRTRIM-SRC-LEN==
                      ==MY-BUF== BY ==LS-STRTRIM-SRC-BUF==.
 

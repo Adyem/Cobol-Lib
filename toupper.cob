@@ -7,7 +7,8 @@
        WORKING-STORAGE SECTION.
 
        LINKAGE SECTION.
-       COPY STRING REPLACING ==MY-STRING== BY ==LS-TOUPPER-SRC==
+       COPY "STRING.cpy" REPLACING
+                     ==MY-STRING== BY ==LS-TOUPPER-SRC==
                      ==MY-LEN== BY ==LS-TOUPPER-SRC-LEN==
                      ==MY-BUF== BY ==LS-TOUPPER-SRC-BUF==.
 

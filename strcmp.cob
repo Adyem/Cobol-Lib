@@ -9,10 +9,12 @@
 
        LINKAGE SECTION.
        01  LS-STRCMP-RETURN        PIC S9(9) COMP-5.
-       COPY STRING REPLACING ==MY-STRING== BY ==LS-STRCMP-SRC1==
+       COPY "STRING.cpy" REPLACING
+                     ==MY-STRING== BY ==LS-STRCMP-SRC1==
                      ==MY-LEN== BY ==LS-STRCMP-SRC1-LEN==
                      ==MY-BUF== BY ==LS-STRCMP-SRC1-BUF==.
-       COPY STRING REPLACING ==MY-STRING== BY ==LS-STRCMP-SRC2==
+       COPY "STRING.cpy" REPLACING
+                     ==MY-STRING== BY ==LS-STRCMP-SRC2==
                      ==MY-LEN== BY ==LS-STRCMP-SRC2-LEN==
                      ==MY-BUF== BY ==LS-STRCMP-SRC2-BUF==.
 

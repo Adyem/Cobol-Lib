@@ -5,13 +5,16 @@
 
        DATA DIVISION.
        WORKING-STORAGE SECTION.
-       COPY STRING REPLACING ==MY-STRING== BY ==WS-STR-01==
+       COPY "STRING.cpy" REPLACING
+                     ==MY-STRING== BY ==WS-STR-01==
                      ==MY-LEN== BY ==WS-STR-01-LEN==
                      ==MY-BUF== BY ==WS-STR-01-BUF==.
-       COPY STRING REPLACING ==MY-STRING== BY ==WS-STRLEFT-RET==
+       COPY "STRING.cpy" REPLACING
+                     ==MY-STRING== BY ==WS-STRLEFT-RET==
                      ==MY-LEN== BY ==WS-STRLEFT-RET-LEN==
                      ==MY-BUF== BY ==WS-STRLEFT-RET-BUF==.
-       COPY STRING REPLACING ==MY-STRING== BY ==WS-STR-02==
+       COPY "STRING.cpy" REPLACING
+                     ==MY-STRING== BY ==WS-STR-02==
                      ==MY-LEN== BY ==WS-STR-02-LEN==
                      ==MY-BUF== BY ==WS-STR-02-BUF==.
        01  WS-CMP-RET       PIC S9(1) COMP-5.

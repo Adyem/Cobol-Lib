@@ -7,7 +7,8 @@
        01  WS-CHAR             PIC X.
 
        LINKAGE SECTION.
-       COPY STRING REPLACING ==MY-STRING== BY ==LS-STRING==
+       COPY "STRING.cpy" REPLACING
+                     ==MY-STRING== BY ==LS-STRING==
                      ==MY-LEN== BY ==LS-STRING-LEN==
                      ==MY-BUF== BY ==LS-STRING-BUF==.
 
