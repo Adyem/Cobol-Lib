@@ -8,7 +8,8 @@ COBCFLAGS  := -Wall -g -O0 --save-temps
 OBJDIR     := objs
 
 SOURCES    := main.cob strcmp.cob strleft.cob strlen.cob strpos.cob \
-              strright.cob strtrim.cob tolower.cob toupper.cob
+              strright.cob strtrim.cob tolower.cob toupper.cob \
+			  name.cob
 OBJS       := $(SOURCES:%.cob=$(OBJDIR)/%.o)
 TEMPS      := $(SOURCES:%.cob=%.c) \
               $(SOURCES:%.cob=%.c.h) \

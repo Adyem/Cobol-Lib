@@ -18,6 +18,7 @@
        01  WS-STRLEFT-LEN   PIC 9(9) COMP-5.
 
        PROCEDURE DIVISION.
+           CALL 'FT-NAME'
            DISPLAY "Running Cobol-Lib tests"
            
            MOVE "   Hello COBOL   " TO WS-STR-01-BUF
