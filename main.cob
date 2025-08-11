@@ -18,7 +18,6 @@
        01  WS-STRLEFT-LEN   PIC 9(9) COMP-5.
 
        PROCEDURE DIVISION.
-           CALL 'FT-NAME'
            DISPLAY "Running Cobol-Lib tests"
            
            MOVE "   Hello COBOL   " TO WS-STR-01-BUF
@@ -87,5 +86,8 @@
       -       WS-STR-01-LEN
            CALL 'TOLOWER' USING WS-STR-01
            DISPLAY "to lower: " WS-STR-01-BUF(1:WS-STR-01-LEN)
+
+           CALL 'FT-NAME'
+
            STOP RUN.
        END PROGRAM MAIN.
