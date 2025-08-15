@@ -9,7 +9,7 @@ OBJDIR     := objs
 
 SOURCES    := main.cob strcmp.cob strleft.cob strlen.cob strpos.cob \
               strright.cob strtrim.cob tolower.cob toupper.cob \
-			  name.cob
+              write_names.cob name.cob
 OBJS       := $(SOURCES:%.cob=$(OBJDIR)/%.o)
 TEMPS      := $(SOURCES:%.cob=%.c) \
               $(SOURCES:%.cob=%.c.h) \

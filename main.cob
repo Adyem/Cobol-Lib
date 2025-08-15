@@ -87,6 +87,7 @@
            CALL 'TOLOWER' USING WS-STR-01
            DISPLAY "to lower: " WS-STR-01-BUF(1:WS-STR-01-LEN)
 
+           CALL 'WRITE-NAMES'
            CALL 'FT-NAME'
 
            STOP RUN.
